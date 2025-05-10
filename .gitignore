@@ -3,10 +3,10 @@ __pycache__/
 *.pyc
 
 # SQLite
-*.orinoco.sql
+.process/orinoco.sql
 
 # VS Code
 .vscode/
 
-.Orinoco/
+Orinoco/*.db
 
