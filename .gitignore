@@ -3,7 +3,11 @@ __pycache__/
 *.pyc
 
 # SQLite
-*.db
+*.orinoco.sql
 
 # VS Code
 .vscode/
+
+.Orinoco
+
+.__init__.py
