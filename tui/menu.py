@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from tui.login import login
 from tui.order_history import view_order_history
 from tui.add_item import prod_categories
+from tui.display_basket import display_basket
 
 def menu():
     
@@ -45,6 +46,9 @@ def menu():
 
         elif choice == 2:
             prod_categories(shopper_id)
+
+        elif choice == 3:
+            display_basket(shopper_id)
             
 
 

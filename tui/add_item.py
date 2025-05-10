@@ -172,13 +172,7 @@ def prod_categories(shopper_id):
 
 
 
-
-
-
-
-
-if __name__ == "__main__":
-    prod_categories(shopper_id=10000)    
+   
 
 
 
