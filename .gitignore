@@ -8,6 +8,5 @@ __pycache__/
 # VS Code
 .vscode/
 
-.Orinoco
+.Orinoco/
 
-.__init__.py
