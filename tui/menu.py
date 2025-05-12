@@ -6,6 +6,8 @@ from tui.login import login
 from tui.order_history import view_order_history
 from tui.add_item import prod_categories
 from tui.display_basket import display_basket
+from tui.change_qty import change_qty
+from tui.delete import delete
 
 def menu():
     
@@ -49,6 +51,12 @@ def menu():
 
         elif choice == 3:
             display_basket(shopper_id)
+
+        elif choice == 4:
+            change_qty(shopper_id)
+
+        elif choice == 5:
+            delete(shopper_id)
             
 
 

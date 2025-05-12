@@ -10,16 +10,22 @@ def display_basket(shopper_id):
     cursor = conn.cursor()
 
 
-    cursor.execute("""SELECT p.product_description, s.seller_name, bc.quantity, bc.price, (bc.price * bc.quantity) AS total 
-                        FROM products p
-                        JOIN product_sellers ps ON ps.product_id = p.product_id
-                        JOIN sellers s ON ps.seller_id = s.seller_id
-                        JOIN basket_contents bc ON ps.product_id = bc.product_id
-                        JOIN shopper_baskets sb ON bc.basket_id = sb.basket_id
-                        JOIN shoppers sh ON sb.shopper_id = sh.shopper_id
-                        WHERE sh.shopper_id = ? AND DATE(sb.basket_created_date_time) = DATE('now')
-                        ORDER BY basket_created_date_time DESC;
-                   """, (shopper_id,))
+    cursor.execute("""
+                    SELECT 
+                        p.product_description, 
+                        s.seller_name, 
+                        bc.quantity, 
+                        bc.price, 
+                        (bc.price * bc.quantity) AS total, 
+                        bc.product_id, 
+                        bc.seller_id
+                    FROM basket_contents bc
+                    JOIN products p ON bc.product_id = p.product_id
+                    JOIN sellers s ON bc.seller_id = s.seller_id
+                    JOIN shopper_baskets sb ON bc.basket_id = sb.basket_id
+                    WHERE sb.shopper_id = ? AND DATE(sb.basket_created_date_time) = DATE('now')
+                    ORDER BY sb.basket_created_date_time DESC
+                """, (shopper_id,))
     
     rows = cursor.fetchall()
 
@@ -30,6 +36,7 @@ def display_basket(shopper_id):
 
     if not rows:
         print("Your basket is empty")
+        return []
     else:
         basket_total = 0
         for i, row in enumerate(rows, start=1):
@@ -40,5 +47,6 @@ def display_basket(shopper_id):
 
     print("\n\n" + " " * 83 + f"Basket Total:" + " " * 23 + f"£{basket_total:.2f}")
     
+    return rows
 
    

@@ -129,8 +129,7 @@ def prod_categories(shopper_id):
                    """,(shopper_id,))
     
     basket_row = cursor.fetchone()
-            
-    
+  
     if basket_row:
         basket_id = basket_row['basket_id']
     else:
@@ -145,8 +144,8 @@ def prod_categories(shopper_id):
     # Insert OR update
     cursor.execute("""
         SELECT quantity FROM basket_contents
-        WHERE basket_id = ? AND product_id = ?
-    """, (basket_id, product_id))
+        WHERE basket_id = ? AND product_id = ? AND seller_id = ?
+    """, (basket_id, product_id, seller_id,))
     existing_row = cursor.fetchone()
 
     if existing_row:
@@ -154,8 +153,8 @@ def prod_categories(shopper_id):
         cursor.execute("""
             UPDATE basket_contents
             SET quantity = ?, price = ?
-            WHERE basket_id = ? AND product_id = ?
-        """, (new_quantity, price, basket_id, product_id))
+            WHERE basket_id = ? AND product_id = ? AND seller_id = ?
+        """, (new_quantity, price, basket_id, product_id, seller_id,))
         print("\nProduct already in basket. Quantity updated.")
     else:
         cursor.execute("""
@@ -169,11 +168,6 @@ def prod_categories(shopper_id):
 
     conn.close()
     return category_id, product_id, seller_id, quantity, price
-
-
-
-   
-
 
 
         
