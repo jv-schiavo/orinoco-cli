@@ -14,18 +14,22 @@ def change_qty(shopper_id):
     if not rows:
         return
 
-    while True:
-        try:
-            item_choice = int(input("\nEnter the basket item no. of the item you want to change:"))
-            if 0 < item_choice <= len(rows):
-                chosen_item = rows[item_choice - 1]
-                print(f"You have chosen: {chosen_item['product_description']}")
-                break
-            else:
-                print("\nThe basket item no. you have entered is invalid")
-                item_choice
-        except ValueError:
-            print("\nInvalid input. Please enter a number.")
+    if len(rows) == 1:
+            chosen_item = rows[0]
+            print(f"\nOnly one item found: {chosen_item['product_description']}")
+    else:        
+        while True:
+                try:
+                    item_choice = int(input("\nEnter the basket item no. of the item you want to change:"))
+                    if 0 < item_choice <= len(rows):
+                        chosen_item = rows[item_choice - 1]
+                        print(f"You have chosen: {chosen_item['product_description']}")
+                        break
+                    else:
+                        print("\nThe basket item no. you have entered is invalid")
+                        item_choice
+                except ValueError:
+                    print("\nInvalid input. Please enter a number.")
 
     while True:
         try:
