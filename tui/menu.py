@@ -8,6 +8,7 @@ from tui.add_item import prod_categories
 from tui.display_basket import display_basket
 from tui.change_qty import change_qty
 from tui.delete import delete
+from tui.checkout import checkout
 
 def menu():
     
@@ -57,6 +58,9 @@ def menu():
 
         elif choice == 5:
             delete(shopper_id)
+
+        elif choice == 6:
+            checkout(shopper_id)
             
 
 
